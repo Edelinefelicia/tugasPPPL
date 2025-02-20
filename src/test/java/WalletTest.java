@@ -120,17 +120,16 @@ class WalletTest {
         dompet8.addMoneyBanknote(uang4);
         dompet8.addMoneyCoin(uang1);
         dompet8.addMoneyCoin(uang2);
-        System.out.println(dompet8.saldo());
         Assertions.assertEquals(14000,dompet8.saldo());
     }
 
     @Test
     void withdrawFalse() {
-        Assertions.assertEquals("Saldo tidak mencukupi",dompet2.withdraw(14000));
+        Assertions.assertEquals("Saldo tidak mencukupi",dompet8.withdraw(14000));
     }
 
     @Test
     void withdrawTrue() {
-        Assertions.assertEquals("Saldo tidak mencukupi",dompet2.withdraw(12000));
+        Assertions.assertEquals("Saldo tidak mencukupi",dompet8.withdraw(12000));
     }
 }
