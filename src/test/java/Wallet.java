@@ -86,8 +86,9 @@ public class Wallet {
         return total;
     }
     public String withdraw(double money){
-        if(saldo()>money && ImpossibleMoney.getImpossibleMoney((int) money)){
+        if(saldo()>=money && !ImpossibleMoney.getImpossibleMoney((int) money)){
             total-=money;
+            return "Saldo mencukupi";
         }
         return "Saldo tidak mencukupi";
     }

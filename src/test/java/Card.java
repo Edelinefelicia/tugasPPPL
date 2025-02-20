@@ -6,9 +6,9 @@ public class Card {
 
     // Constructor
     public Card(String name, String cardNumber) {
-//        if (!isValidCardNumber(cardNumber)) {
-//            throw new IllegalArgumentException("Nomor kartu tidak valid!");
-//        }
+        if (!isValidCardNumber(cardNumber)) {
+            throw new IllegalArgumentException("Nomor kartu tidak valid!");
+        }
         this.name = name;
         this.cardNumber = cardNumber;
     }

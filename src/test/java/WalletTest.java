@@ -12,6 +12,9 @@ class WalletTest {
     Owner owner6 = new Owner("farhan", 21, "Bogor");
     Owner owner7 = new Owner("naran", 29, "Bogor");
     Owner owner8 = new Owner("farhan", 21, "Bogor");
+    Owner owner9 = new Owner("kevin", 22, "Bogor");
+    Owner owner10 = new Owner("siti", 23, "Bogor");
+    Owner owner11 = new Owner("hanif", 24, "Bogor");
     Wallet dompet1 = new Wallet(owner2);
     Wallet dompet2 = new Wallet(owner1);
     Wallet dompet3 = new Wallet(owner3);
@@ -20,17 +23,15 @@ class WalletTest {
     Wallet dompet6 = new Wallet(owner6);
     Wallet dompet7 = new Wallet(owner7);
     Wallet dompet8 = new Wallet(owner8);
+    Wallet dompet9 = new Wallet(owner9);
+    Wallet dompet10 = new Wallet(owner10);
+    Wallet dompet11 = new Wallet(owner11);
 
 
     @Test
     void testSetOwner() {
-//        owner1  = new Owner("budi", 19, "Yogya");
-//        dompet2 = new Wallet(owner1);
-//        dompet2.getOwner();
-//        dompet1.getOwner();
         Assertions.assertEquals(owner1,dompet2.getOwner());
         Assertions.assertEquals(owner2,dompet1.getOwner());
-//        Assertions.assertEquals(owner2,dompet1);
     }
 
     @Test
@@ -39,21 +40,17 @@ class WalletTest {
         Card kartu2 = new Card("KartuPelajar", "10101020");
         dompet1.addCard(kartu1);
         dompet1.addCard(kartu2);
-//        System.out.println("kartu1"+dompet2.getListkartu());
         Assertions.assertEquals(kartu1.getName(), dompet1.getListkartu().get(0).getName());
         Assertions.assertEquals(kartu2.getName(), dompet1.getListkartu().get(1).getName());
     }
 
     @Test
-    void testAddCardIsExisted() {
-//        Card kartu1 = new Card("ATM", "101010aa");
+    void testAddCardIfIsExisted() {
         Card kartu1 = new Card("ATM", "10101010");
         Card kartu2 = new Card("ATM2", "10101010");
         dompet2.addCard(kartu1);
         dompet2.addCard(kartu2);
         Assertions.assertEquals(1, dompet2.getListkartu().size());
-//        System.out.println(kartu3);
-//        System.out.println(dompet2.getListkartu());
         Assertions.assertFalse(dompet2.getListkartu().contains(kartu2));
     }
 
@@ -61,17 +58,16 @@ class WalletTest {
     @Test
     void testAmbilCard() {
         Card kartu1 = new Card("ATM", "10101010");
-        Card kartu2 = new Card("ATM2", "10101010");
+        Card kartu2 = new Card("ATM2", "10101020");
         dompet3.addCard(kartu1);
         dompet3.addCard(kartu2);
         dompet3.ambilCard(kartu2);
-        System.out.println(dompet3.getListkartu().getFirst().getName());
         Assertions.assertEquals(1, dompet3.getListkartu().size());
         Assertions.assertFalse(dompet3.getListkartu().contains(kartu2));
     }
 
     @Test
-    void addMoneyBanknoteTrue() {
+    void testAddMoneyBanknoteTrue() {
         //karena tulisannya 'menambahkan uang rupiah',maka dianggap pengguna ingin semua uang yang dimasukkan merupakan banknote bukan koin
         Banknote uang1 = new Banknote(3000);
         Banknote uang2 = new Banknote(5000);
@@ -83,7 +79,7 @@ class WalletTest {
     }
 
     @Test
-    void addMoneyBanknoteFalse() {
+    void testAddMoneyBanknoteFalse() {
         Banknote uang1 = new Banknote(20020);
         dompet5.addMoneyBanknote(uang1);
         Assertions.assertEquals(0, dompet5.getListuang().size());
@@ -91,27 +87,26 @@ class WalletTest {
     }
 
     @Test
-    void addMoneyCoinTrue() {
+    void testAddMoneyCoinTrue() {
         Coin uang1 = new Coin(1000);
         Coin uang2 = new Coin(5000);
         dompet6.addMoneyCoin(uang1);
         dompet6.addMoneyCoin(uang2);
-        Assertions.assertEquals(2, dompet2.getListuang().size());
-        Assertions.assertEquals(uang1.getNominal(), dompet2.getListuang().get(0).getNominal());
-        Assertions.assertEquals(uang2.getNominal(), dompet2.getListuang().get(1).getNominal());
+        Assertions.assertEquals(2, dompet6.getListuang().size());
+        Assertions.assertEquals(uang1.getNominal(), dompet6.getListuang().get(0).getNominal());
+        Assertions.assertEquals(uang2.getNominal(), dompet6.getListuang().get(1).getNominal());
     }
 
     @Test
-    void addMoneyCoinFalse() {
+    void testAddMoneyCoinFalse() {
         Coin uang1 = new Coin(2001);
         dompet7.addMoneyCoin(uang1);
         Assertions.assertEquals(0, dompet7.getListuang().size());
         Assertions.assertFalse(dompet7.getListuang().contains(uang1));
-        System.out.println(dompet7);
     }
 
     @Test
-    void saldo() {
+    void testSaldo() {
         Coin uang1 = new Coin(1000);
         Coin uang2 = new Coin(5000);
         Banknote uang3 = new Banknote(3000);
@@ -124,12 +119,33 @@ class WalletTest {
     }
 
     @Test
+    void testNoSaldo() {
+        Assertions.assertEquals(0,dompet9.saldo());
+    }
+
+    @Test
     void withdrawFalse() {
-        Assertions.assertEquals("Saldo tidak mencukupi",dompet8.withdraw(14000));
+        Coin uang1 = new Coin(1000);
+        Coin uang2 = new Coin(5000);
+        Banknote uang3 = new Banknote(3000);
+        Banknote uang4 = new Banknote(5000);
+        dompet9.addMoneyBanknote(uang3);
+        dompet9.addMoneyBanknote(uang4);
+        dompet9.addMoneyCoin(uang1);
+        dompet9.addMoneyCoin(uang2);
+        Assertions.assertEquals("Saldo tidak mencukupi",dompet9.withdraw(15000));
     }
 
     @Test
     void withdrawTrue() {
-        Assertions.assertEquals("Saldo tidak mencukupi",dompet8.withdraw(12000));
+        Coin uang1 = new Coin(1000);
+        Coin uang2 = new Coin(5000);
+        Banknote uang3 = new Banknote(3000);
+        Banknote uang4 = new Banknote(5000);
+        dompet10.addMoneyBanknote(uang3);
+        dompet10.addMoneyBanknote(uang4);
+        dompet10.addMoneyCoin(uang1);
+        dompet10.addMoneyCoin(uang2);
+        Assertions.assertEquals("Saldo mencukupi",dompet10.withdraw(14000));
     }
 }
