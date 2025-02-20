@@ -24,7 +24,7 @@ public class Card {
     }
 
     // Validasi nomor kartu (harus berupa angka dan panjang minimal 8 digit)
-    private boolean isValidCardNumber(String cardNumber) {
+    public boolean isValidCardNumber(String cardNumber) {
         return Pattern.matches("\\d{8,}", cardNumber);
     }
 }

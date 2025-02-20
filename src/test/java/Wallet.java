@@ -6,13 +6,12 @@ public class Wallet {
     private ArrayList<Card> listkartu;
     private ArrayList<Money> listuang;
     List<Integer> nilaiTidakMungkin = ImpossibleMoney.getImpossibleMoney();
-
+//    List<Integer> nilaiTidakMungkin = ImpossibleMoney.getImpossibleMoney();
 
     public Wallet(Owner owner) {
         this.listkartu = new ArrayList<Card>();
         this.listuang = new ArrayList<Money>();
     }
-
 
     public Owner getOwner() {
         return owner;
@@ -25,11 +24,31 @@ public class Wallet {
     // Fungsi untuk menambahkan kartu ke dalam dompet
     public void addCard(Card kartu) {
         if(!listkartu.contains(kartu)){
-            listkartu.add(kartu);
+            for(Card itemkartu : listkartu){
+                if(itemkartu.getCardNumber()==kartu.getCardNumber()){
+                    listkartu.add(kartu);
+                }
+            }
         }
     }
 
-    public void getCard(Card kartu){
+    public ArrayList<Card> getListkartu() {
+        return listkartu;
+    }
+
+    public void setListkartu(ArrayList<Card> listkartu) {
+        this.listkartu = listkartu;
+    }
+
+    public ArrayList<Money> getListuang() {
+        return listuang;
+    }
+
+    public void setListuang(ArrayList<Money> listuang) {
+        this.listuang = listuang;
+    }
+
+    public void ambilCard(Card kartu){
         if(listkartu.contains(kartu)){
             listkartu.remove(kartu);
         }
