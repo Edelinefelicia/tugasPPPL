@@ -6,9 +6,9 @@ public class Card {
 
     // Constructor
     public Card(String name, String cardNumber) {
-        if (!isValidCardNumber(cardNumber)) {
-            throw new IllegalArgumentException("Nomor kartu tidak valid!");
-        }
+//        if (!isValidCardNumber(cardNumber)) {
+//            throw new IllegalArgumentException("Nomor kartu tidak valid!");
+//        }
         this.name = name;
         this.cardNumber = cardNumber;
     }
@@ -25,6 +25,7 @@ public class Card {
 
     // Validasi nomor kartu (harus berupa angka dan panjang minimal 8 digit)
     public boolean isValidCardNumber(String cardNumber) {
+
         return Pattern.matches("\\d{8,}", cardNumber);
     }
 }
