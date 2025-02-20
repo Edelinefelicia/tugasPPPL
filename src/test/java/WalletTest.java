@@ -19,7 +19,7 @@ class WalletTest {
     Wallet dompet5 = new Wallet(owner5);
     Wallet dompet6 = new Wallet(owner6);
     Wallet dompet7 = new Wallet(owner7);
-    Wallet dompet9 = new Wallet(owner8);
+    Wallet dompet8 = new Wallet(owner8);
 
 
     @Test
@@ -94,8 +94,8 @@ class WalletTest {
     void addMoneyCoinTrue() {
         Coin uang1 = new Coin(1000);
         Coin uang2 = new Coin(5000);
-        dompet2.addMoneyCoin(uang1);
-        dompet2.addMoneyCoin(uang2);
+        dompet6.addMoneyCoin(uang1);
+        dompet6.addMoneyCoin(uang2);
         Assertions.assertEquals(2, dompet2.getListuang().size());
         Assertions.assertEquals(uang1.getNominal(), dompet2.getListuang().get(0).getNominal());
         Assertions.assertEquals(uang2.getNominal(), dompet2.getListuang().get(1).getNominal());
@@ -104,17 +104,24 @@ class WalletTest {
     @Test
     void addMoneyCoinFalse() {
         Coin uang1 = new Coin(2001);
-        dompet2.addMoneyCoin(uang1);
-        Assertions.assertEquals(0, dompet2.getListuang().size());
-        Assertions.assertFalse(dompet2.getListuang().contains(uang1));
-        System.out.println(dompet2);
+        dompet7.addMoneyCoin(uang1);
+        Assertions.assertEquals(0, dompet7.getListuang().size());
+        Assertions.assertFalse(dompet7.getListuang().contains(uang1));
+        System.out.println(dompet7);
     }
 
     @Test
     void saldo() {
-w
-        System.out.println(dompet2.saldo());
-        Assertions.assertEquals(14000,dompet2.saldo());
+        Coin uang1 = new Coin(1000);
+        Coin uang2 = new Coin(5000);
+        Banknote uang3 = new Banknote(3000);
+        Banknote uang4 = new Banknote(5000);
+        dompet8.addMoneyBanknote(uang3);
+        dompet8.addMoneyBanknote(uang4);
+        dompet8.addMoneyCoin(uang1);
+        dompet8.addMoneyCoin(uang2);
+        System.out.println(dompet8.saldo());
+        Assertions.assertEquals(14000,dompet8.saldo());
     }
 
     @Test
