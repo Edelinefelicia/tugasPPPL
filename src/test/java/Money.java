@@ -7,5 +7,4 @@ public class Money {
     public int getNominal() {
         return nominal;
     }
-
 }
